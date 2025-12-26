@@ -36,18 +36,27 @@ body::before {
         linear-gradient(to right, #1a0b02 0%, #050200 60%, #000000 100%);
 }
 
-/* --- Camada 1: Imagem de Fundo --- */
 .fullscreen-bg {
     position: fixed;
     top: 0;
-    left: 25%; 
-    width: 75%;
+    /* PUSH TO RIGHT: Anchor it to the right side */
+    right: 0;
+    /* DECREASE WIDTH: Occupy only 65% of the screen (adjust this % to resize) */
+    width: 65%;
     height: 100%;
-    z-index: -3; /* Sits on top of the dark gradient */
-    background: url('images/background_image.jpg') no-repeat left center;
+    z-index: -3;
+    
+    background: url('images/background_image.jpg') no-repeat center center;
     background-size: cover;
-    box-shadow: -40px 0 80px rgba(0,0,0,0.9);
-    transition: all 0.5s ease; /* Smooth transition for resizing */
+    
+    /* GRADIENT COMPENSATION: 
+       Since the container starts partway across the screen, 
+       we fade its left edge (0% to 40%) to transparent 
+       so it blends with the body background color. */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
+    mask-image: linear-gradient(to right, transparent 0%, black 40%);
+    
+    transition: all 0.5s ease;
 }
 
 .overlay {
